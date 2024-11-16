@@ -1,0 +1,42 @@
+// Calculos.idl: Origen IDL de Calculos
+//
+
+// La herramienta MIDL procesa este archivo y
+// producir la biblioteca de tipos (Calculos.tlb) y el código de serialización.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,
+	pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[
+	uuid(b4581a64-da70-408b-8e06-1dac125d7d2b),
+	version(1.0),
+	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{2195f3fe-0f0d-4916-8e1a-560c68acf86c}")
+]
+library CalculosLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(2195f3fe-0f0d-4916-8e1a-560c68acf86c)
+	]
+	coclass CompReg
+	{
+		[default] interface IComponentRegistrar;
+	};
+};
+
